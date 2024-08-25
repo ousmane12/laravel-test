@@ -7,17 +7,34 @@ use Illuminate\Http\Request;
 
 class PatientDemographicController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return PatientDemographic::all();
     }
 
+    /**
+     * Retrieves towns from a given region.
+     *
+     * @param  string  $region
+     * @return \Illuminate\Http\Response
+     */
     public function show($region)
     {
         $towns = PatientDemographic::where('town', $region)->get(['town', 'quartier']);
         return response()->json($towns);
     }
 
+    /**
+     * Retrieves statistics from a given town, quartier.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function getStatistics(Request $request)
     {
         $town = $request->input('town');
@@ -69,7 +86,12 @@ class PatientDemographicController extends Controller
         ]);
     }
 
-
+    /**
+     * Retrieves quartiers from a given prefecture.
+     *
+     * @param  string  $prefecture
+     * @return \Illuminate\Http\Response
+     */
     public function getArea($prefecture)
     {
         $towns = PatientDemographic::where('town', $prefecture)->distinct()->get(['quartier']);

@@ -1,4 +1,4 @@
-# Laravel Docker Setup For Clinico Assessment Project
+# Clinico Assessment Project
 Overview
 ## Repository Description
 
@@ -105,6 +105,51 @@ php artisan test
 ```
 
 This command will execute all the tests defined in the application and provide you with the test results, but make sure your containers are running.
+
+## Continuous Integration with GitHub Actions
+
+This project utilizes GitHub Actions for Continuous Integration (CI) to automate testing and ensure code quality. The CI workflow is configured to run tests automatically on each push and pull request to the master branch.
+
+### Workflow Overview
+
+The GitHub Actions workflow is defined in the `.github/workflows` directory of this repository. The primary workflow file is `laravel.yml`, which performs the following tasks:
+
+1. Setup Environment:
+    - Uses `shivammathur/setup-php` to install PHP.
+    - Configures MySQL service for database tests.
+
+2. Install Dependencies:
+    - Runs `composer install` to install PHP dependencies.
+
+3. Prepare Environment:
+    - Copies the `.env` file if it does not exist.
+    - Generates the application key using `php artisan key:generate`.
+    - Sets directory permissions for storage and bootstrap/cache.
+
+4. Run Migrations:
+    - Executes database migrations with `php artisan migrate --force`.
+
+5. Run Tests:
+    - Runs the tests with `php artisan test`.
+
+### How to Run the Workflow Locally
+
+While GitHub Actions runs the workflow automatically, you can manually run the workflow locally for testing and debugging purposes. To do this:
+
+1. Install GitHub CLI:
+    - Ensure you have GitHub CLI installed. You can download it from [GitHub CLI](https://cli.github.com).
+
+2. Trigger the Workflow:
+    - Use the GitHub CLI to trigger the workflow manually. Run the following command:
+      ```bash
+      gh workflow run laravel.yml
+      ```
+
+3. Check Workflow Status:
+    - You can check the status of the workflow runs with:
+      ```bash
+      gh run list
+      ```
 
 ## Screenshot
 
