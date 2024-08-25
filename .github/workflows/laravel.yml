@@ -8,7 +8,6 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
 
     services:
@@ -16,16 +15,14 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: assessmentDB
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
         ports:
-        - 3306:3306
+          - 3306:3306
 
     steps:
     - uses: actions/checkout@v4
@@ -46,9 +43,9 @@ jobs:
         DB_CONNECTION: mysql
         DB_HOST: 127.0.0.1
         DB_PORT: 3306
-        DB_DATABASE: test_db
-        DB_USERNAME: user
-        DB_PASSWORD: password
+        DB_DATABASE: assessmentDB
+        DB_USERNAME: root
+        DB_PASSWORD: root
       run: php artisan migrate --force
     - name: Execute Tests
       run: php artisan test --colors

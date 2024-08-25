@@ -5,11 +5,8 @@ namespace Tests\Unit;
 use App\Models\PatientDemographic;
 use Mockery;
 use Tests\TestCase;
-use Illuminate\Http\Request;
-use PHPUnit\Framework\Attributes\Test;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use App\Exceptions\Handler;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\Test;
 
 class PatientDemographicControllerTest extends TestCase
 {
@@ -18,7 +15,7 @@ class PatientDemographicControllerTest extends TestCase
         parent::setUp();
     }
 
-    
+    #[Test]
     public function testIndex()
     {
         $patientDemographicMock = Mockery::mock(PatientDemographic::class);
@@ -32,10 +29,7 @@ class PatientDemographicControllerTest extends TestCase
         $response->assertJson([]);
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
+    #[Test]
     public function testShow()
     {
         $region = 'Conakry';
@@ -52,10 +46,7 @@ class PatientDemographicControllerTest extends TestCase
         $response->assertJson([]);
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
+    #[Test]
     public function testGetArea()
     {
         $prefecture = 'Conakry';
@@ -73,10 +64,7 @@ class PatientDemographicControllerTest extends TestCase
         $response->assertJson([]);
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
+    #[Test]
     public function testStatistics()
     {
         $this->mock(PatientDemographic::class, function (MockInterface $mock) {
