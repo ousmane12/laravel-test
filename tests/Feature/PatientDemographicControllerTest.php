@@ -73,6 +73,62 @@ class PatientDemographicControllerTest extends TestCase
         $response->assertJson([]);
     }
 
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    public function testStatistics()
+    {
+        $this->mock(PatientDemographic::class, function (MockInterface $mock) {
+            $mock->shouldReceive('query->where->get')
+                ->andReturn(collect([
+                    (object) [
+                        'total_patients' => 0,
+                        'total_adult_men' => null,
+                        'total_adult_women' => null,
+                        'total_pregnant_women' => null,
+                        'total_children' => null,
+                        'total_bp_measurements' => null,
+                        'total_glucose_measurements' => null,
+                        'total_bp_sys' => null,
+                        'total_bp_dias' => null,
+                        'total_glucose_level' => null,
+                        'bp_normal' => null,
+                        'bp_high' => null,
+                        'bp_very_high' => null,
+                        'glucose_normal' => null,
+                        'glucose_high' => null,
+                        'glucose_very_high' => null
+                    ]
+                ]));
+        });
+
+        $town = 'mytown';
+        $quartier = 'myquartier';
+        
+        $response = $this->json('GET', '/statistics', ['town' => $town, 'quartier' => $quartier]);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'total_patients' => 0,
+                'total_adult_men' => null,
+                'total_adult_women' => null,
+                'total_pregnant_women' => null,
+                'total_children' => null,
+                'total_bp_measurements' => null,
+                'total_glucose_measurements' => null,
+                'total_bp_sys' => null,
+                'total_bp_dias' => null,
+                'total_glucose_level' => null,
+                'bp_normal' => null,
+                'bp_high' => null,
+                'bp_very_high' => null,
+                'glucose_normal' => null,
+                'glucose_high' => null,
+                'glucose_very_high' => null
+            ]);
+    }
+
     protected function tearDown(): void
     {
         Mockery::close();

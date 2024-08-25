@@ -104,7 +104,7 @@ To run the tests for your Laravel application, use the following command:
 php artisan test
 ```
 
-This command will execute all the tests defined in the application and provide you with the test results.
+This command will execute all the tests defined in the application and provide you with the test results, but make sure your containers are running.
 
 ## Screenshot
 
