@@ -1,4 +1,4 @@
-# Clinico Assessment Project
+# Training Project on Laravel
 Overview
 ## Repository Description
 
@@ -22,8 +22,8 @@ Follow these steps to set up the project:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/ousmane12/test-clinico-ousmane.git
-    cd test-clinico-ousmane
+    git clone https://github.com/ousmane12/laravel-test.git
+    cd laravel-test
     ```
 
 2. Configure Environment Variables:
